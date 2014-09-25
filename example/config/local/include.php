@@ -3,7 +3,7 @@
 
 require(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'heroku' . DIRECTORY_SEPARATOR . 'include.php');
 
-// Add local defaults/overrides
+// Add local overrides
 
 require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'overrides.php');
 

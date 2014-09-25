@@ -1,6 +1,6 @@
 <?php
 
-use neam\bootstrap;
+namespace neam\bootstrap;
 
 require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'common.php');
 

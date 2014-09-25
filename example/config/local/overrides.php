@@ -21,7 +21,8 @@ if (substr(getcwd(), 0, 5) == "/code") {
 // Database configuration
 $_ENV["DATABASE_SCHEME"] = "mysql";
 $_ENV["DATABASE_HOST"] = $_ENV["LOCAL_SERVICES_IP"];
-$_ENV["DATABASE_USER"] = "13306";
+$_ENV["DATABASE_PORT"] = "13306";
+$_ENV["DATABASE_USER"] = "root";
 $_ENV["DATABASE_PASSWORD"] = ""; // This is set in secrets.php
 $_ENV["DATABASE_NAME"] = "db";
 

@@ -9,7 +9,7 @@ if (!class_exists('Env')) {
 
 // Define what application-specific config to expect - see README.md for more information
 $config_include = Config::read('CONFIG_INCLUDE', $default = 'config/local/include.php', $required = false);
-$project_root = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
+$project_root = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
 $config = $project_root . DIRECTORY_SEPARATOR . $config_include;
 if (!is_readable($config)) {
     echo "PHP app config file not available ($config).";
