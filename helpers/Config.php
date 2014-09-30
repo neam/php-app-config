@@ -34,13 +34,13 @@ class Config
     static public function handleSpecialDirectives()
     {
         if (static::configured("DATABASE_URL")) {
-            $url = parse_url(static::$expected["DATABASE_URL"]);
-            static::$expected["DATABASE_SCHEME"] = $url['scheme'];
-            static::$expected["DATABASE_HOST"] = $url['host'];
-            static::$expected["DATABASE_PORT"] = $url['port'];
-            static::$expected["DATABASE_USER"] = $url['user'];
-            static::$expected["DATABASE_PASSWORD"] = urldecode($url['pass']);
-            static::$expected["DATABASE_NAME"] = trim($url['path'], '/');
+            $url = parse_url(static::read("DATABASE_URL"));
+            $_ENV["DATABASE_SCHEME"] = $url['scheme'];
+            $_ENV["DATABASE_HOST"] = $url['host'];
+            $_ENV["DATABASE_PORT"] = $url['port'];
+            $_ENV["DATABASE_USER"] = $url['user'];
+            $_ENV["DATABASE_PASSWORD"] = urldecode($url['pass']);
+            $_ENV["DATABASE_NAME"] = trim($url['path'], '/');
         } else {
             unset(static::$expected["DATABASE_URL"]);
             static::expect("DATABASE_SCHEME");
@@ -51,13 +51,14 @@ class Config
             static::expect("DATABASE_NAME");
         }
         if (static::configured("SMTP_URL")) {
-            $url = parse_url(static::$expected["SMTP_URL"]);
+            $url = parse_url(static::read("SMTP_URL"));
             isset($url['query']) && parse_str($url['query'], $args);
-            static::$expected["SMTP_HOST"] = $url['host'];
-            static::$expected["SMTP_PORT"] = $url['port'];
-            static::$expected["SMTP_USERNAME"] = $url['user'];
-            static::$expected["SMTP_PASSWORD"] = urldecode($url['pass']);
-            static::$expected["SMTP_ENCRYPTION"] = isset($args['encryption']) ? $args['encryption'] : false;
+            $url = parse_url(static::read("DATABASE_URL"));
+            $_ENV["SMTP_HOST"] = $url['host'];
+            $_ENV["SMTP_PORT"] = $url['port'];
+            $_ENV["SMTP_USERNAME"] = $url['user'];
+            $_ENV["SMTP_PASSWORD"] = urldecode($url['pass']);
+            $_ENV["SMTP_ENCRYPTION"] = isset($args['encryption']) ? $args['encryption'] : false;
         } else {
             unset(static::$expected["SMTP_URL"]);
             static::expect("SMTP_HOST");
