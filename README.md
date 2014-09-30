@@ -53,9 +53,9 @@ After:
 
 Configuration directives are expected to be available through environment variables, either by the system, web server, php-fpm or by hackishly populating $_ENV during a bootstrapping phase (see the `local` example config file for the latter).
 
-The `include.php` file will load a file (defaulting to `project-root/config/local/include.php`) that defines what application-specific config to expect.
+The `include.php` file will load a file (defaulting to `project-root/config/local/include.php`) that defines what application-specific configuration directives to expect.
 
-To change the expected config include file, set the `CONFIG_INCLUDE` environment variable to the path to the include relative to the project root. For instance, in order to use `project-root/config/heroku/include.php`, set the CONFIG_INCLUDE environment variable to `config/heroku/include.php`.
+To change the expected config include file, set the `CONFIG_INCLUDE` environment variable to the path to the include relative to the project root. For instance, in order to use `project-root/config/paas/include.php`, set the CONFIG_INCLUDE environment variable to `config/paas/include.php`.
 
 Within the config include file, you define which directives to expect using the Config::expect() method:
 
@@ -65,14 +65,14 @@ The `include.php` file will then call `Config::defineConstants()` which will def
 
 ## Using the example config includes
 
-The included example configuration includes sample config profiles used to deploy to Heroku and/or running the code locally.
+The included example configuration includes sample config profiles used to deploy to Heroku-style services and/or running the code locally.
 
 ### Heroku
 
 1. Deploy the app to Heroku.
 2. Set the CONFIG_INCLUDE config var to `heroku`
 
-    $ heroku config:set CONFIG_INCLUDE=config/heroku/include.php
+    $ heroku config:set CONFIG_INCLUDE=config/paas/include.php
 
 3. Set the expected config vars (DATABASE_URL, GA_TRACKING_ID etc) to their respective values
 
@@ -80,7 +80,7 @@ Your app should now run on Heroku using the expected config vars as PHP constant
 
 ### Local
 
-The example local config include will first expect the `heroku`, then load the `overrides.php` file, followed by a non-versioned file called `secrets.php`. To use the local configuration:
+The example local config include will first expect the `paas`, then load the `overrides.php` file, followed by a non-versioned file called `secrets.php`. To use the local configuration:
 
 1. Create your secret local configuration file
 

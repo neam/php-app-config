@@ -1,7 +1,7 @@
 <?php
-// Expect the "heroku" config as base
+// Expect the "paas" config as base
 
-require(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'heroku' . DIRECTORY_SEPARATOR . 'include.php');
+require(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'paas' . DIRECTORY_SEPARATOR . 'include.php');
 
 // Add local overrides
 
