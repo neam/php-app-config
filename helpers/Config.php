@@ -43,13 +43,13 @@ class Config
             $_ENV["DATABASE_NAME"] = trim($url['path'], '/');
         } else {
             unset(static::$expected["DATABASE_URL"]);
-            static::expect("DATABASE_SCHEME");
-            static::expect("DATABASE_HOST");
-            static::expect("DATABASE_PORT");
-            static::expect("DATABASE_USER");
-            static::expect("DATABASE_PASSWORD");
-            static::expect("DATABASE_NAME");
         }
+        static::expect("DATABASE_SCHEME");
+        static::expect("DATABASE_HOST");
+        static::expect("DATABASE_PORT");
+        static::expect("DATABASE_USER");
+        static::expect("DATABASE_PASSWORD");
+        static::expect("DATABASE_NAME");
         if (static::configured("SMTP_URL")) {
             $url = parse_url(static::read("SMTP_URL"));
             isset($url['query']) && parse_str($url['query'], $args);
@@ -61,12 +61,12 @@ class Config
             $_ENV["SMTP_ENCRYPTION"] = isset($args['encryption']) ? $args['encryption'] : false;
         } else {
             unset(static::$expected["SMTP_URL"]);
-            static::expect("SMTP_HOST");
-            static::expect("SMTP_PORT");
-            static::expect("SMTP_USERNAME");
-            static::expect("SMTP_PASSWORD");
-            static::expect("SMTP_ENCRYPTION");
         }
+        static::expect("SMTP_HOST");
+        static::expect("SMTP_PORT");
+        static::expect("SMTP_USERNAME");
+        static::expect("SMTP_PASSWORD");
+        static::expect("SMTP_ENCRYPTION");
     }
 
     /**
