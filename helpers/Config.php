@@ -29,10 +29,14 @@ class Config
     }
 
     /**
-     * Handle special directives - see README.md
+     * Handle special directives - optional - see README.md
      */
     static public function handleSpecialDirectives()
     {
+        if (static::read("EXPAND_CONFIG_URLS") != "1") {
+            return;
+        }
+
         if (static::configured("DATABASE_URL")) {
             $url = parse_url(static::read("DATABASE_URL"));
             $_ENV["DATABASE_SCHEME"] = $url['scheme'];

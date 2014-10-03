@@ -103,9 +103,9 @@ To use the config in a shell-script:
     source /tmp/php-app-config.sh
     # now the config is available to the shell-script
 
-## Special configuration directives
+## (Optional) Support for special configuration directives
 
-Some times it may be more convenient to set access details using the URL format. The helper class currently includes special handling of the following configuration directives.
+Some times it may be more convenient to set access details using the URL format. The helper class currently includes special handling of the following configuration directives. Enable it by setting the environment variable `EXPAND_CONFIG_URLS` to `1`.
 
 ### DATABASE_URL or DATABASE_*-constants
 
