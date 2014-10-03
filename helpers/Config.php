@@ -5,7 +5,7 @@ namespace neam\bootstrap;
 class Config
 {
 
-    static protected $expected;
+    static protected $expected = array();
 
     /**
      * Adds a config variable that is expected to be set through environment variables together
@@ -56,8 +56,6 @@ class Config
         static::expect("DATABASE_NAME");
         if (static::configured("SMTP_URL")) {
             $url = parse_url(static::read("SMTP_URL"));
-            isset($url['query']) && parse_str($url['query'], $args);
-            $url = parse_url(static::read("DATABASE_URL"));
             $_ENV["SMTP_HOST"] = $url['host'];
             $_ENV["SMTP_PORT"] = $url['port'];
             $_ENV["SMTP_USERNAME"] = $url['user'];
