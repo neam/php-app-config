@@ -3,7 +3,7 @@
 namespace neam\bootstrap;
 
 // Make sure to have the Env helper class available
-if (!class_exists('Env')) {
+if (!class_exists('Config', false)) {
     require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'Config.php');
 }
 
