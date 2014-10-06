@@ -43,7 +43,7 @@ Before:
 After:
 
     'db' => array(
-        'connectionString' => 'mysql:host=' . DATABASE_HOST . (defined('DATABASE_PORT') && !empty(DATABASE_PORT) ? ';port=' . DATABASE_PORT : '') . ';dbname=' . DATABASE_NAME,
+        'connectionString' => 'mysql:host=' . DATABASE_HOST . (defined('DATABASE_PORT') && DATABASE_PORT != '' ? ';port=' . DATABASE_PORT : '') . ';dbname=' . DATABASE_NAME,
         'emulatePrepare' => true,
         'username' => DATABASE_USER,
         'password' => DATABASE_PASSWORD,
