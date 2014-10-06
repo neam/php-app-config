@@ -73,10 +73,10 @@ The `include.php` file will then call `Config::defineConstants()` which will def
 
 The included example configuration includes sample config profiles used to deploy to Heroku-style services and/or running the code locally.
 
-### Heroku
+### Platform as a Service
 
-- Deploy the app to Heroku.
-- Set the CONFIG_INCLUDE config var to `heroku`
+- Deploy the app to a PaaS, in this example we use Heroku - adapt accordingly for other PaaS providers.
+- Set the CONFIG_INCLUDE config var to `config/paas/include.php`
 
 ```
 $ heroku config:set CONFIG_INCLUDE=config/paas/include.php
