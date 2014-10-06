@@ -7,23 +7,26 @@ For use by the application wherever it may be fit, for instance in the applicati
 
 ## Installation
 
-1. Install via composer:
+- Install via composer:
 
+```
+composer.phar require neam/php-app-config:dev-develop
+```
 
-    composer.phar require neam/php-app-config:dev-develop
+- Copy the `example/config` folder into the root directory of your project.
 
-2. Copy the `example/config` folder into the root directory of your project.
+```
+cp -r vendor/neam/php-app-config/example/config config
+```
 
+- Make sure that all app entry scripts include the file called `include.php` right after including the composer autoloader (adjust the path as necessary in each entry script):
 
-    cp -r vendor/neam/php-app-config/example/config config
+```
+// Make app config available as PHP constants
+require(dirname(__FILE__) . '/../vendor/neam/php-app-config/include.php');
+```
 
-3. Make sure that all app entry scripts include the file called `include.php` right after including the composer autoloader (adjust the path as necessary in each entry script):
-
-
-    // Make app config available as PHP constants
-    require(dirname(__FILE__) . '/vendor/neam/php-app-config/include.php');
-
-4. Replace config vars in your app with the corresponding PHP constants. Example of usage within Yii configuration:
+- Replace config vars in your app with the corresponding PHP constants. Example of usage within Yii configuration:
 
 Before:
 
@@ -51,7 +54,10 @@ After:
 
 ## How it works
 
-Configuration directives are expected to be available through environment variables, either by the system, web server, php-fpm or by hackishly populating $_ENV during a bootstrapping phase (see the `local` example config file for the latter).
+Configuration directives are looked for in the following places:
+ * $_ENV (which can be populated during a bootstrapping phase as in the `local` example config file)
+ * php-fpm environment variables (set in php-fpm configuration files and available through getenv())
+ * apache sub-process environment variables (set in Apache 2.x vhost config and available through apache_getenv())
 
 The `include.php` file will load a file (defaulting to `project-root/config/local/include.php`) that defines what application-specific configuration directives to expect.
 
@@ -69,12 +75,14 @@ The included example configuration includes sample config profiles used to deplo
 
 ### Heroku
 
-1. Deploy the app to Heroku.
-2. Set the CONFIG_INCLUDE config var to `heroku`
+- Deploy the app to Heroku.
+- Set the CONFIG_INCLUDE config var to `heroku`
 
-    $ heroku config:set CONFIG_INCLUDE=config/paas/include.php
+```
+$ heroku config:set CONFIG_INCLUDE=config/paas/include.php
+```
 
-3. Set the expected config vars (DATABASE_URL, GA_TRACKING_ID etc) to their respective values
+- Set the expected config vars (DATABASE_URL, GA_TRACKING_ID etc) to their respective values
 
 Your app should now run on Heroku using the expected config vars as PHP constants.
 
@@ -82,16 +90,18 @@ Your app should now run on Heroku using the expected config vars as PHP constant
 
 The example local config include will first expect the `paas`, then load the `overrides.php` file, followed by a non-versioned file called `secrets.php`. To use the local configuration:
 
-1. Create your secret local configuration file
+- Create your secret local configuration file
 
-    cp ../core/app/config/envbootstrap/local/envbootstrap.dist.php ../core/app/config/envbootstrap/local/envbootstrap.php
+```
+cp config/local/secrets.dist.php config/local/secrets.php
+```
 
-2. Add general defaults/overrides that all developers use locally in the `overrides.php` file
-3. Add secret defaults/overrides that should not be versioned to the `secrets.php` file
+- Add general defaults/overrides that all developers use locally in the `overrides.php` file
+- Add secret defaults/overrides that should not be versioned to the `secrets.php` file
 
 Your app should now run locally using the expected config vars as PHP constants.
 
-## Usage
+## Useful commands
 
 To show your current config, you can run the following in a shell:
 
