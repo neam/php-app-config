@@ -15,6 +15,7 @@ if (substr(getcwd(), 0, 5) == "/code") {
     $_ENV["LOCAL_SERVICES_IP"] = "127.0.0.1";
 }
 
-// Include the secrets file containing non-versioned secrets
+// Loads sensitive (non-versioned) environment variables from .env to getenv(), $_ENV.
 
-require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'secrets.php');
+\Dotenv::makeMutable();
+\Dotenv::load($project_root);
