@@ -26,3 +26,7 @@ Config::expect("SENTRY_DSN", $default = null, $required = true);
 
 // Google Analytics ID
 Config::expect("GA_TRACKING_ID", $default = null, $required = true);
+
+// ==== Debug-related config ====
+
+Config::expect("YII_DEBUG", $default = false);
