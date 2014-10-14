@@ -5,7 +5,7 @@
 
 namespace neam\bootstrap;
 
-// Don't require config for sentry error reporting not google analytics tracking when running locally
+// Don't require config for sentry error reporting nor google analytics tracking when running locally
 
 Config::expect("SENTRY_DSN", $default = null, $required = false);
 Config::expect("GA_TRACKING_ID", $default = null, $required = false);
