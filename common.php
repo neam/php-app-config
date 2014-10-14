@@ -2,9 +2,12 @@
 
 namespace neam\bootstrap;
 
-// Make sure to have the Env helper class available
+// Make the helper classes available without requiring autoloading
 if (!class_exists('Config', false)) {
     require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'Config.php');
+}
+if (!class_exists('Dotenv', false)) {
+    require(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'vendor/vlucas/phpdotenv/src/Dotenv.php');
 }
 
 // Define what application-specific config to expect - see README.md for more information

@@ -90,10 +90,11 @@ Your app should now run on Heroku using the expected config vars as PHP constant
 
 The example local config include will first expect the `paas`, then load the `overrides.php` file, followed by a non-versioned file called `secrets.php`. To use the local configuration:
 
-- Create your secret local configuration file
+- Create ang gitignore your secret local configuration file
 
 ```
-cp config/local/secrets.dist.php config/local/secrets.php
+cp .env.dist .env
+echo ".env" >> .gitignore
 ```
 
 - Add general defaults/overrides that all developers use locally in the `overrides.php` file

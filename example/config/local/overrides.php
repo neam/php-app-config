@@ -10,40 +10,10 @@ namespace neam\bootstrap;
 Config::expect("SENTRY_DSN", $default = null, $required = false);
 Config::expect("GA_TRACKING_ID", $default = null, $required = false);
 
-// Different local services ip based on running from inside docker container (identified by the simple code path "/code") or locally
+// Don't require the _URL constant since we're setting DATABASE_ constants in .env
 
-if (substr(getcwd(), 0, 5) == "/code") {
-    $_ENV["LOCAL_SERVICES_IP"] = "172.17.42.1";
-} else {
-    $_ENV["LOCAL_SERVICES_IP"] = "127.0.0.1";
-}
+Config::expect("DATABASE_URL", $default = null, $required = false);
 
-// Database configuration
-$_ENV["DATABASE_SCHEME"] = "mysql";
-$_ENV["DATABASE_HOST"] = $_ENV["LOCAL_SERVICES_IP"];
-$_ENV["DATABASE_PORT"] = "13306";
-$_ENV["DATABASE_USER"] = "root";
-$_ENV["DATABASE_PASSWORD"] = ""; // This is set in secrets.php
-$_ENV["DATABASE_NAME"] = "db";
+// Don't require the _URL constant since we're setting SMTP_ constants in .env
 
-Config::expect("DATABASE_URL", $default = null, $required = false); // Don't require the _URL constant since we've now instead set the above
-
-// Mailcatcher is used as local SMTP by default
-$_ENV["MAILCATCHER_HOST"] = $_ENV["LOCAL_SERVICES_IP"];
-$_ENV["MAILCATCHER_HTTP_PORT"] = "1080";
-$_ENV["MAILCATCHER_SMTP_PORT"] = "1025";
-$_ENV["SMTP_HOST"] = $_ENV["MAILCATCHER_HOST"];
-$_ENV["SMTP_PORT"] = $_ENV["MAILCATCHER_SMTP_PORT"];
-
-Config::expect("SMTP_URL", $default = null, $required = false); // Don't require the _URL constant since we've now instead set the above
-
-// Note: To send real emails locally devs can use Google's SMTP server with their own accounts: https://www.digitalocean.com/community/articles/how-to-use-google-s-smtp-server
-/*
-$_ENV["MAIL_SENDER_NAME"] = "Mr. T";
-$_ENV["MAIL_SENDER_EMAIL"] = "devemail@gmail.com";
-$_ENV["SMTP_HOST"] = "smtp.gmail.com";
-$_ENV["SMTP_USERNAME"] = "foo";
-$_ENV["SMTP_PASSWORD"] = "bar";
-$_ENV["SMTP_PORT"] = "587";
-$_ENV["SMTP_ENCRYPTION"] = "tls";
- */
+Config::expect("SMTP_URL", $default = null, $required = false);
