@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fba781c10474bcf6ca750676bdc4f026",
+    "hash": "63376eb9220ca6c2f603a057d88bec9e",
     "packages": [
         {
             "name": "vlucas/phpdotenv",
-            "version": "dev-master",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "a2f418e11f64c4208d7681e59bc485465531839d"
+                "reference": "e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/a2f418e11f64c4208d7681e59bc485465531839d",
-                "reference": "a2f418e11f64c4208d7681e59bc485465531839d",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237",
+                "reference": "e783b688cf5bc29a4ffd1b79c92eb4dd2a2e2237",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2014-10-13 18:54:36"
+            "time": "2014-10-14 15:06:44"
         }
     ],
     "packages-dev": [
@@ -65,9 +65,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "vlucas/phpdotenv": 20
-    },
+    "stability-flags": [
+
+    ],
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3.0"

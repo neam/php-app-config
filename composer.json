@@ -16,7 +16,7 @@
         "classmap": ["helpers/"]
     },
     "require": {
-        "vlucas/phpdotenv": "dev-master",
+        "vlucas/phpdotenv": "v1.0.8",
         "php": ">=5.3.0"
     },
     "require-dev": {
