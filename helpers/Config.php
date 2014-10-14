@@ -113,6 +113,11 @@ class Config
             $value = apache_getenv($ref);
         }
 
+        // Fallback to $_SERVER
+        if (empty($value) && isset($_SERVER[$ref])) {
+            $value = $_SERVER[$ref];
+        }
+
         // Handle the case when the env var is empty
         if (empty($value)) {
             if ($required) {

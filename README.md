@@ -58,6 +58,7 @@ Configuration directives are looked for in the following places:
  * $_ENV (which can be populated during a bootstrapping phase as in the `local` example config file)
  * php-fpm environment variables (set in php-fpm configuration files and available through getenv())
  * apache sub-process environment variables (set in Apache 2.x vhost config and available through apache_getenv())
+ * php-cgi params (set in nginx location blocks using fastcgi_param and available through $_SERVER)
 
 The `include.php` file will load a file (defaulting to `project-root/config/local/include.php`) that defines what application-specific configuration directives to expect.
 
