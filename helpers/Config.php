@@ -125,7 +125,9 @@ class Config
             }
             // All configuration directives are expected to be non-empty, but since this one is not required, we settle with writing
             // a warning to the error_log
-            error_log("$ref empty, defaulting to $default");
+            if (defined('SEND_WARNINGS_ABOUT_EMPTY_CONFIG_TO_ERROR_LOG') && SEND_WARNINGS_ABOUT_EMPTY_CONFIG_TO_ERROR_LOG) {
+                error_log("[php-app-config] $ref empty, defaulting to $default");
+            }
             $value = $default;
         }
 
