@@ -58,8 +58,8 @@ class Config
             $url = parse_url(static::read("SMTP_URL"));
             $_ENV["SMTP_HOST"] = $url['host'];
             $_ENV["SMTP_PORT"] = $url['port'];
-            $_ENV["SMTP_USERNAME"] = $url['user'];
-            $_ENV["SMTP_PASSWORD"] = urldecode($url['pass']);
+            $_ENV["SMTP_USERNAME"] = isset($args['user']) ? $url['user'] : null;
+            $_ENV["SMTP_PASSWORD"] = isset($args['pass']) ? urldecode($url['pass']) : null;
             $_ENV["SMTP_ENCRYPTION"] = isset($args['encryption']) ? $args['encryption'] : false;
         } else {
             unset(static::$expected["SMTP_URL"]);
