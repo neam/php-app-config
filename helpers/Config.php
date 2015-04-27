@@ -29,56 +29,10 @@ class Config
     }
 
     /**
-     * Handle special directives - optional - see README.md
-     */
-    static public function handleSpecialDirectives()
-    {
-        if (static::read("EXPAND_CONFIG_URLS") != "1") {
-            return;
-        }
-
-        if (static::configured("DATABASE_URL")) {
-            $url = parse_url(static::read("DATABASE_URL"));
-            $_ENV["DATABASE_SCHEME"] = $url['scheme'];
-            $_ENV["DATABASE_HOST"] = $url['host'];
-            $_ENV["DATABASE_PORT"] = $url['port'];
-            $_ENV["DATABASE_USER"] = $url['user'];
-            $_ENV["DATABASE_PASSWORD"] = urldecode($url['pass']);
-            $_ENV["DATABASE_NAME"] = trim($url['path'], '/');
-        } else {
-            unset(static::$expected["DATABASE_URL"]);
-        }
-        static::expect("DATABASE_SCHEME");
-        static::expect("DATABASE_HOST");
-        static::expect("DATABASE_PORT");
-        static::expect("DATABASE_USER");
-        static::expect("DATABASE_PASSWORD");
-        static::expect("DATABASE_NAME");
-        if (static::configured("SMTP_URL")) {
-            $url = parse_url(static::read("SMTP_URL"));
-            $_ENV["SMTP_HOST"] = $url['host'];
-            $_ENV["SMTP_PORT"] = $url['port'];
-            $_ENV["SMTP_USERNAME"] = isset($args['user']) ? $url['user'] : null;
-            $_ENV["SMTP_PASSWORD"] = isset($args['pass']) ? urldecode($url['pass']) : null;
-            $_ENV["SMTP_ENCRYPTION"] = isset($args['encryption']) ? $args['encryption'] : false;
-        } else {
-            unset(static::$expected["SMTP_URL"]);
-        }
-        static::expect("SMTP_HOST");
-        static::expect("SMTP_PORT");
-        static::expect("SMTP_USERNAME");
-        static::expect("SMTP_PASSWORD");
-        static::expect("SMTP_ENCRYPTION");
-    }
-
-    /**
      * Make environment config available as immutable constants
      */
     static public function defineConstants()
     {
-        // Handle special directives
-        static::handleSpecialDirectives();
-
         // Set the corresponding PHP constants
         foreach (static::$expected as $ref => $var) {
             static::defineConstant($ref, $var["default"], $var["required"]);
@@ -164,9 +118,6 @@ class Config
      */
     static public function exportValues()
     {
-        // Handle special directives
-        static::handleSpecialDirectives();
-
         // Export the current config
         $values = array();
         foreach (static::$expected as $ref => $var) {

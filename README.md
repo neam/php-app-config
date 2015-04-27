@@ -114,39 +114,3 @@ To use the config in a shell-script:
     php vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh
     source /tmp/php-app-config.sh
     # now the config is available to the shell-script
-
-## (Optional) Support for special configuration directives
-
-Some times it may be more convenient to set access details using the URL format. The helper class currently includes special handling of the following configuration directives. Enable it by setting the environment variable `EXPAND_CONFIG_URLS` to `1`.
-
-### DATABASE_URL or DATABASE_*-constants
-
-Determines what backing service to use for MySQL-compatible database access.
-
-The relevant constants are:
-
- * DATABASE_SCHEME
- * DATABASE_HOST
- * DATABASE_USER
- * DATABASE_PASSWORD
- * DATABASE_NAME
-
-Database connection details can also be supplied by setting the DATABASE_URL configuration directive in the format `mysql2://username:urlencodedpassword@host:port/db`
-
-When DATABASE_URL and DATABASE_*-constants both are available, the individual DATABASE_*-constants are ignored.
-
-### SMTP_URL or SMTP_*-constants
-
-Determines what backing service to use for mail sending.
-
-The relevant constants are:
-
- * SMTP_HOST
- * SMTP_USERNAME
- * SMTP_PASSWORD
- * SMTP_PORT
- * SMTP_ENCRYPTION
-
-SMTP details can also be supplied by setting the SMTP_URL configuration directive in the format `smtp://username:urlencodedpassword@host:587?encryption=tls`
-
-When SMTP_URL and SMTP_*-constants both are available, the individual SMTP_*-constants are ignored.
