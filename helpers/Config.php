@@ -139,7 +139,7 @@ class Config
             case "shell":
 
                 foreach ($values as $ref => $val) {
-                    $output .= escapeshellcmd("export $ref=\"$val\"") . "\n";
+                    $output .= "export $ref='$val'" . "\n";
                 }
 
                 break;
