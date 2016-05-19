@@ -111,6 +111,5 @@ To show your current config, you can run the following in a shell:
 
 To use the config in a shell-script:
 
-    php vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh
-    source /tmp/php-app-config.sh
+    source vendor/neam/php-app-config/shell-export.sh
     # now the config is available to the shell-script
