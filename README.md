@@ -62,7 +62,7 @@ Configuration directives are looked for in the following places:
 
 The `include.php` file will load a file (defaulting to `project-root/config/local/include.php`) that defines what application-specific configuration directives to expect.
 
-To change the expected config include file, set the `CONFIG_INCLUDE` environment variable to the path to the include relative to the project root. For instance, in order to use `project-root/config/paas/include.php`, set the CONFIG_INCLUDE environment variable to `config/paas/include.php`.
+To change the expected config include file, set the `CONFIG_INCLUDE` environment variable to the path to the include relative to the project root. For instance, in order to use `project-root/config/remote/include.php`, set the CONFIG_INCLUDE environment variable to `config/remote/include.php`.
 
 Within the config include file, you define which directives to expect using the Config::expect() method:
 
@@ -77,10 +77,10 @@ The included example configuration includes sample config profiles used to deplo
 ### Platform as a Service
 
 - Deploy the app to a PaaS, in this example we use Heroku - adapt accordingly for other PaaS providers.
-- Set the CONFIG_INCLUDE config var to `config/paas/include.php`
+- Set the CONFIG_INCLUDE config var to `config/remote/include.php`
 
 ```
-$ heroku config:set CONFIG_INCLUDE=config/paas/include.php
+$ heroku config:set CONFIG_INCLUDE=config/remote/include.php
 ```
 
 - Set the expected config vars (DATABASE_URL, GA_TRACKING_ID etc) to their respective values
@@ -89,7 +89,7 @@ Your app should now run on Heroku using the expected config vars as PHP constant
 
 ### Local
 
-The example local config include will first expect the `paas`, then load the `overrides.php` file, followed by a non-versioned file called `secrets.php`. To use the local configuration:
+The example local config include will first expect the `remote`, then load the `overrides.php` file, followed by a non-versioned file called `secrets.php`. To use the local configuration:
 
 - Create ang gitignore your secret local configuration file
 
