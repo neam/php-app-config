@@ -113,3 +113,7 @@ To use the config in a shell-script:
 
     source vendor/neam/php-app-config/shell-export.sh
     # now the config is available to the shell-script
+
+To export the current configuration to a file which can be sourced by a shell script:
+
+    php -d variables_order="EGPCS" vendor/neam/php-app-config/export.php > .exported.php-app-config.inc.sh

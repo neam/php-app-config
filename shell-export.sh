@@ -4,7 +4,7 @@
 
 export TMPDIR="$(mktemp -d)"
 export PHP_APP_CONFIG_EXPORTED=0
-php vendor/neam/php-app-config/export.php > $TMPDIR/php-app-config.sh
+php -d variables_order="EGPCS" vendor/neam/php-app-config/export.php > $TMPDIR/php-app-config.sh
 
 if [ "$?" == "0" ]; then
     source $TMPDIR/php-app-config.sh
