@@ -16,4 +16,4 @@ fi
 
 rm -r "$TMPDIR"
 
-[ "$PHP_APP_CONFIG_EXPORTED" == "1" ] || exit 1;
+[ "$PHP_APP_CONFIG_EXPORTED" == "1" ] || echo "Warning: The PHP app config was not exported successfully";
