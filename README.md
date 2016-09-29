@@ -10,7 +10,7 @@ For use by the application wherever it may be fit, for instance in the applicati
 - Install via composer:
 
 ```
-composer.phar require neam/php-app-config:dev-develop
+composer require neam/php-app-config:dev-develop
 ```
 
 - Copy the `example/config` folder into the root directory of your project.
@@ -62,7 +62,7 @@ Configuration directives are looked for in the following places:
 
 The `include.php` file will load a file (defaulting to `project-root/config/local/include.php`) that defines what application-specific configuration directives to expect.
 
-To change the expected config include file, set the `CONFIG_INCLUDE` environment variable to the path to the include relative to the project root. For instance, in order to use `project-root/config/paas/include.php`, set the CONFIG_INCLUDE environment variable to `config/paas/include.php`.
+To change the expected config include file, set the `CONFIG_INCLUDE` environment variable to the path to the include relative to the project root. For instance, in order to use `project-root/config/remote/include.php`, set the CONFIG_INCLUDE environment variable to `config/remote/include.php`.
 
 Within the config include file, you define which directives to expect using the Config::expect() method:
 
@@ -74,13 +74,14 @@ The `include.php` file will then call `Config::defineConstants()` which will def
 
 The included example configuration includes sample config profiles used to deploy to Heroku-style services and/or running the code locally.
 
-### Platform as a Service
+### Remote deployment (Docker Cloud / Platform as a Service)
 
-- Deploy the app to a PaaS, in this example we use Heroku - adapt accordingly for other PaaS providers.
-- Set the CONFIG_INCLUDE config var to `config/paas/include.php`
+- Deploy the app to Docker Cloud or a PaaS
+- Set the CONFIG_INCLUDE config var to `config/remote/include.php`
 
+#### Example - Heroku
 ```
-$ heroku config:set CONFIG_INCLUDE=config/paas/include.php
+$ heroku config:set CONFIG_INCLUDE=config/remote/include.php
 ```
 
 - Set the expected config vars (DATABASE_URL, GA_TRACKING_ID etc) to their respective values
@@ -89,7 +90,7 @@ Your app should now run on Heroku using the expected config vars as PHP constant
 
 ### Local
 
-The example local config include will first expect the `paas`, then load the `overrides.php` file, followed by a non-versioned file called `secrets.php`. To use the local configuration:
+The example local config include will first expect the `remote`, then load the `overrides.php` file, followed by a non-versioned file called `secrets.php`. To use the local configuration:
 
 - Create ang gitignore your secret local configuration file
 
@@ -107,10 +108,13 @@ Your app should now run locally using the expected config vars as PHP constants.
 
 To show your current config, you can run the following in a shell:
 
-    php vendor/neam/php-app-config/export.php
+    php -d variables_order="EGPCS" vendor/neam/php-app-config/export.php
 
 To use the config in a shell-script:
 
-    php vendor/neam/php-app-config/export.php | tee /tmp/php-app-config.sh
-    source /tmp/php-app-config.sh
+    source vendor/neam/php-app-config/shell-export.sh
     # now the config is available to the shell-script
+
+To export the current configuration to a file which can be sourced by a shell script:
+
+    php -d variables_order="EGPCS" vendor/neam/php-app-config/export.php > .exported.php-app-config.inc.sh
