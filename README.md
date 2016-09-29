@@ -10,7 +10,7 @@ For use by the application wherever it may be fit, for instance in the applicati
 - Install via composer:
 
 ```
-composer.phar require neam/php-app-config:dev-develop
+composer require neam/php-app-config:dev-develop
 ```
 
 - Copy the `example/config` folder into the root directory of your project.
@@ -74,11 +74,12 @@ The `include.php` file will then call `Config::defineConstants()` which will def
 
 The included example configuration includes sample config profiles used to deploy to Heroku-style services and/or running the code locally.
 
-### Platform as a Service
+### Remote deployment (Docker Cloud / Platform as a Service)
 
-- Deploy the app to a PaaS, in this example we use Heroku - adapt accordingly for other PaaS providers.
+- Deploy the app to Docker Cloud or a PaaS
 - Set the CONFIG_INCLUDE config var to `config/remote/include.php`
 
+#### Example - Heroku
 ```
 $ heroku config:set CONFIG_INCLUDE=config/remote/include.php
 ```
@@ -107,7 +108,7 @@ Your app should now run locally using the expected config vars as PHP constants.
 
 To show your current config, you can run the following in a shell:
 
-    php vendor/neam/php-app-config/export.php
+    php -d variables_order="EGPCS" vendor/neam/php-app-config/export.php
 
 To use the config in a shell-script:
 
